@@ -1,0 +1,5 @@
+*.pyc
+*.idea
+fasterpay/*.pyc
+fasterpay/tests/*.pyc
+
