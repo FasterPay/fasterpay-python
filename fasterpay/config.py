@@ -1,19 +1,19 @@
 #!/usr/bin/python
 
-class FP_Config:
+class Config:
 
     def __init__(self, privateKey, publicKey, apiUrl = None, apiVersion = None):
         self.publicKey = publicKey
         self.privateKey = privateKey
         if apiUrl is not None :
-            self.apiUrl = apiUrl
+            self.API_BASE_URL = apiUrl
         else:
-            self.apiUrl = "http://develop.pay2.fasterpay.bamboo.stuffio.com/payment/form"
+            self.API_BASE_URL = "http://develop.pay2.fasterpay.bamboo.stuffio.com"
 
         if apiVersion is not None :
-            self.apiVersion = apiVersion
+            self.VERSION = apiVersion
         else:
-            self.apiVersion = "1.0.0"
+            self.VERSION = "1.0.0"
 
     def get_public_key(self):
         return self.publicKey
@@ -22,7 +22,7 @@ class FP_Config:
         return self.privateKey
 
     def get_api_url(self):
-        return self.apiUrl
+        return self.API_BASE_URL
 
     def get_api_version(self):
-        return self.apiVersion
+        return self.VERSION
