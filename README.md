@@ -24,17 +24,20 @@ if __name__ == "__main__":
 
   gateway = Gateway("<your private key>", "<your public key>")
 
-  payload = {
-      "description": "Golden Ticket",
-      "amount": "0.01",
-      "currency": "EUR",
-      "merchant_order_id": "xxxxx",
-      "success_url": "https://yourcompanywebsite.com/success"
+  parameters = {
+    "payload": {
+        "description": "Golden Ticket",
+        "amount": "0.01",
+        "currency": "EUR",
+        "merchant_order_id": random.randint(1000, 9999),
+        "success_url": "http://localhost:12345/success.php",
+    },
+    "auto_submit_form": True
   }
 
-paymentForm = gateway.payment_form().build_form(payload)
+  paymentForm = gateway.payment_form().build_form(parameters)
 
-print paymentForm
+  print paymentForm
 ```
 
 For more information on the API Parameters, refer to our entire API Documentation [here](https://docs.fasterpay.com/api#section-custom-integration)
@@ -43,7 +46,7 @@ For more information on the API Parameters, refer to our entire API Documentatio
 
 ```python
 from flask import request
-from fasterpay.gateway import FP_Gateway
+from fasterpay.gateway import Gateway
 gateway = Gateway("<your private key>", "<your public key>")
 if gateway.pingback().validate({"apiKey": request.headers.get("X-ApiKey")}) is True:
   print "OK"
@@ -57,7 +60,7 @@ FasterPay has a Sandbox environment called Test Mode. Test Mode is a virtual tes
 ### Initiating FasterPay Gateway in Test-Mode
 ```python
 from fasterpay.gateway import Gateway
-gateway = Gateway("<your private key>", "<your public key>", "https://pay.sandbox.faterpay.com")
+gateway = Gateway("<your private key>", "<your public key>", is_test=False)
 ```
 
 ### Questions?
