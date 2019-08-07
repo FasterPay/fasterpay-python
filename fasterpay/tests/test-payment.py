@@ -4,7 +4,7 @@ from fasterpay.gateway import Gateway
 import random
 
 if __name__ == "__main__":
-    gateway = Gateway("4a6608170097835d0fbb856662e99da3", "e416c4de8ffd2b198d83713b8d232fab", True)
+    gateway = Gateway("<your private key>", "<your public key>", True)
 
     parameters = {
         "payload": {

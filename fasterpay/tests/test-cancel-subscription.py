@@ -5,7 +5,7 @@ from random import randint
 
 if __name__ == "__main__":
 
-    gateway = Gateway("<your private key>", "<your public key>")
+    gateway = Gateway("<your private key>", "<your public key>", True)
 
     response = gateway.subscription().cancel(order_id=1171)
 
