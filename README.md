@@ -22,19 +22,22 @@ from fasterpay.gateway import Gateway
 
 if __name__ == "__main__":
 
-  gateway = Gateway("<your private key>", "<your public key>")
+  gateway = Gateway("<your private key>", "<your public key>", True)
 
-  payload = {
-      "description": "Golden Ticket",
-      "amount": "0.01",
-      "currency": "EUR",
-      "merchant_order_id": "xxxxx",
-      "success_url": "https://yourcompanywebsite.com/success"
-  }
+  parameters = {
+        "payload": {
+            "description": "Golden Ticket",
+            "amount": "0.01",
+            "currency": "EUR",
+            "merchant_order_id": str(random.randint(1000, 9999)),
+            "success_url": "https://4f9f73c1.ngrok.io/success",
+            "sign_version": "v2",
+            "pingback_url": "https://4f9f73c1.ngrok.io/pingback",
+        }
+    }
 
-paymentForm = gateway.payment_form().build_form(payload)
-
-print paymentForm
+  paymentForm = gateway.payment_form().build_form(parameters)
+  print paymentForm
 ```
 
 For more information on the API Parameters, refer to our entire API Documentation [here](https://docs.fasterpay.com/api#section-custom-integration)
@@ -44,11 +47,22 @@ For more information on the API Parameters, refer to our entire API Documentatio
 ```python
 from flask import request
 from fasterpay.gateway import FP_Gateway
-gateway = Gateway("<your private key>", "<your public key>")
-if gateway.pingback().validate({"apiKey": request.headers.get("X-ApiKey")}) is True:
-  print "OK"
+gateway = Gateway("<your private key>", "<your public key>", True)
+pingback_data = request.get_data()
+if request.headers.get("X-Fasterpay-Signature-Version") == "v2":
+    headers = {
+        "X-Fasterpay-Signature": str(request.headers.get("X-Fasterpay-Signature")),
+        "X-Fasterpay-Signature-Version": str(request.headers.get("X-Fasterpay-Signature-Version"))
+    }
 else:
-  print "NOK"
+    headers = {
+        "X-ApiKey": str(request.headers.get("X-ApiKey"))
+    }
+
+if gateway.pingback().validate(pingback_data, headers) is True:
+    return "OK"
+else:
+    return "NOK"
 ```
 
 ## FasterPay Test Mode
@@ -57,7 +71,7 @@ FasterPay has a Sandbox environment called Test Mode. Test Mode is a virtual tes
 ### Initiating FasterPay Gateway in Test-Mode
 ```python
 from fasterpay.gateway import Gateway
-gateway = Gateway("<your private key>", "<your public key>", "https://pay.sandbox.faterpay.com")
+gateway = Gateway("<your private key>", "<your public key>", True)
 ```
 
 ### Questions?

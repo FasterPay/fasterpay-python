@@ -1,8 +1,10 @@
 #!/usr/bin/python
 from config import Config
-from validator.signature import Signature
-from validator.pingback import Pingback
-from request.paymentform import PaymentForm
+from signature import Signature
+from pingback import Pingback
+from paymentform import PaymentForm
+from refund import Refund
+from subscription import Subscription
 
 
 class Gateway:
@@ -21,6 +23,12 @@ class Gateway:
 
     def get_config(self):
         return self.config
+
+    def refund(self):
+        return Refund(self)
+
+    def subscription(self):
+        return Subscription(self)
 
 
 
