@@ -4,7 +4,7 @@ from fasterpay.gateway import Gateway
 
 if __name__ == "__main__":
 
-    gateway = Gateway("<your private key>", "<your public key>")
+    gateway = Gateway("<your private key>", "<your public key>", True)
 
     payload = {
         "description": "Golden Ticket",

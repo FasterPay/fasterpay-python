@@ -2,13 +2,13 @@
 
 class Config:
 
-    def __init__(self, privateKey, publicKey, apiUrl = None, apiVersion = None):
+    def __init__(self, privateKey, publicKey, is_test = False, apiVersion = None):
         self.publicKey = publicKey
         self.privateKey = privateKey
-        if apiUrl is not None :
-            self.API_BASE_URL = apiUrl
+        if is_test is True :
+            self.API_BASE_URL = "http://pay.fasterpay.com"
         else:
-            self.API_BASE_URL = "http://develop.pay2.fasterpay.bamboo.stuffio.com"
+            self.API_BASE_URL = "http://pay.sandbox.fasterpay.com"
 
         if apiVersion is not None :
             self.VERSION = apiVersion
