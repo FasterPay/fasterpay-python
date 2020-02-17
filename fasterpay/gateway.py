@@ -5,6 +5,7 @@ from pingback import Pingback
 from paymentform import PaymentForm
 from refund import Refund
 from subscription import Subscription
+from transaction import Transaction
 
 
 class Gateway:
@@ -30,5 +31,7 @@ class Gateway:
     def subscription(self):
         return Subscription(self)
 
+    def transaction(self):
+        return Transaction(self)
 
 
