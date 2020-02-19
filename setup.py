@@ -1,8 +1,8 @@
 from distutils.core import setup
 setup(
-  name='FasterPay Python SDK',
+  name='fasterpay-python',
   packages=['fasterpay'],
-  version='1.1',
+  version='1.2',
   license='MIT',
   description='Integrate FasterPay into your application using fasterpay-python SDK',
   author='FasterPay Integrations Team',
@@ -14,8 +14,8 @@ setup(
   classifiers=[
     'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Developers',
-    'Topic :: Software Development :: Payment Gateway',
-    'License :: MIT License',
+    'Topic :: Software Development :: Libraries :: Python Modules',
+    'License :: OSI Approved :: MIT License',
     'Programming Language :: Python :: 2.7',
   ],
 )
